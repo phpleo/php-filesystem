@@ -44,6 +44,9 @@ class poDownload
         exit('<html><head><title>404 Not Found</title></head><body>404 Not Found</body></html>');
     }
 
+    /**
+     * Force download with sfRequest of symfony framework
+     */
     static public function sfForce()
     {
         
