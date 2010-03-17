@@ -51,14 +51,14 @@ class poDownload
     {
         if (file_exists($filepath))
         {
-            $filename = basename($filepath);
-            $n = sprintf('%s_%s.%s', $newName, date('(Y-m-d_H:i:s)'), 'csv');
+            /*$filename = basename($filepath);
+            $n = sprintf('%s_%s.%s', $newName, date('(Y-m-d_H:i:s)'), 'csv');*/
 
             $sfAction->getResponse()->setHttpHeader('date', date('D M j G:i:s T Y'), true);
             $sfAction->getResponse()->setHttpHeader('last-modified', date('D M j G:i:s T Y'), true);
             $sfAction->getResponse()->setHttpHeader('content-transfer-encoding', 'binary', true);
             $sfAction->getResponse()->setHttpHeader('content-type', 'application/octet-stream', true);
-            $sfAction->getResponse()->setHttpHeader('content-disposition', 'attachment; filename='.$n, true);
+            $sfAction->getResponse()->setHttpHeader('content-disposition', 'attachment; filename='.$newName, true);
             $sfAction->getResponse()->setHttpHeader('content-length', (string) filesize($filepath), true);
         }
         else
