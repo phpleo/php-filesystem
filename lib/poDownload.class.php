@@ -51,9 +51,6 @@ class poDownload
     {
         if (file_exists($filepath))
         {
-            /*$filename = basename($filepath);
-            $n = sprintf('%s_%s.%s', $newName, date('(Y-m-d_H:i:s)'), 'csv');*/
-
             $sfAction->getResponse()->setHttpHeader('date', date('D M j G:i:s T Y'), true);
             $sfAction->getResponse()->setHttpHeader('last-modified', date('D M j G:i:s T Y'), true);
             $sfAction->getResponse()->setHttpHeader('content-transfer-encoding', 'binary', true);
