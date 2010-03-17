@@ -47,9 +47,24 @@ class poDownload
     /**
      * Force download with sfRequest of symfony framework
      */
-    static public function sfForce()
+    static public function sfForce($sfAction, $filepath, $newName)
     {
-        
+        if (file_exists($filepath))
+        {
+            $filename = basename($filepath);
+            $n = sprintf('%s_%s.%s', $newName, date('(Y-m-d_H:i:s)'), 'csv');
+
+            $sfAction->getResponse()->setHttpHeader('date', date('D M j G:i:s T Y'), true);
+            $sfAction->getResponse()->setHttpHeader('last-modified', date('D M j G:i:s T Y'), true);
+            $sfAction->getResponse()->setHttpHeader('content-transfer-encoding', 'binary', true);
+            $sfAction->getResponse()->setHttpHeader('content-type', 'application/octet-stream', true);
+            $sfAction->getResponse()->setHttpHeader('content-disposition', 'attachment; filename='.$n, true);
+            $sfAction->getResponse()->setHttpHeader('content-length', (string) filesize($filepath), true);
+        }
+        else
+        {
+            $sfAction->renderText('<html><head><title>404 Not Found</title></head><body>404 Not Found</body></html>');
+        }
     }
 
 }
